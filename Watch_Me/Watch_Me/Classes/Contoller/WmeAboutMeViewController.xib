@@ -19,13 +19,13 @@
                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="42" id="ZPG-aZ-xUS">
-                            <variation key="heightClass=regular-widthClass=compact" constant="300"/>
+                            <variation key="heightClass=regular-widthClass=compact" constant="320"/>
                         </constraint>
                         <constraint firstAttribute="height" constant="67" id="ZTE-fV-ita">
                             <variation key="heightClass=regular-widthClass=compact" constant="400"/>
                         </constraint>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
@@ -34,8 +34,7 @@
                             <exclude reference="ZTE-fV-ita"/>
                         </mask>
                     </variation>
-                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                        <rect key="frame" x="50" y="51" width="300" height="300"/>
+                    <variation key="heightClass=regular-widthClass=compact">
                         <mask key="constraints">
                             <include reference="ZPG-aZ-xUS"/>
                             <include reference="ZTE-fV-ita"/>

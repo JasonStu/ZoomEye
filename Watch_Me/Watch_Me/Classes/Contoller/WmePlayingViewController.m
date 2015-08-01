@@ -33,17 +33,14 @@ static double moveTime = 0;
 @end
 
 @implementation WmePlayingViewController
-
-
-
--(void)viewWillDisappear:(BOOL)animated
+- (void)dealloc
 {
-    [super viewDidDisappear:animated];
     [self removeObserverFromPlayerItem:self.player.currentItem];
     [self removeNotification];
     [self removeTimer];
     [self.player removeTimeObserver:self.av];
-    self.player = nil;
+    [self.player replaceCurrentItemWithPlayerItem:self.player.currentItem];
+
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -56,10 +53,6 @@ static double moveTime = 0;
     _Hidden = NO;
     [self addNotification];
 
-    
-   
-    
-    // Do any additional setup after loading the view from its nib.
 }
 
 -(void)setupUI{
@@ -74,11 +67,8 @@ static double moveTime = 0;
     self.MovieTime.text = self.title;
     self.Alltime.text = @"00:00";
     self.StaryTime.text= @"00:00";
-    
-    
-    
-}
 
+}
 
 /**z
  *  初始化播放器
@@ -104,19 +94,9 @@ static double moveTime = 0;
  *  @return AVPlayerItem对象
  */
 -(AVPlayerItem *)getPlayItem{
-//    NSLog(@"%@",self.url);
-//    if (self.url!=nil) {
-//       
-//
-//    }else
-//    {
-//        NSLog(@"播放失败%s%d",__FUNCTION__,__LINE__);
-//    }
-//    return nil;
-    
-    
     NSString *urlStr=self.url;
-    urlStr =[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"%@",urlStr);
+//    urlStr =[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url=[NSURL URLWithString:urlStr];
     AVPlayerItem *playerItem=[AVPlayerItem playerItemWithURL:url];
     return playerItem;
@@ -129,7 +109,7 @@ static double moveTime = 0;
 -(void)addNotification{
     //给AVPlayerItem添加播放完成通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.player.currentItem];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerERROR:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:self.player.currentItem];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerERROR:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:self.player.currentItem];
 }
 
 -(void)removeNotification{
@@ -171,13 +151,7 @@ static double moveTime = 0;
     [playerItem removeObserver:self forKeyPath:@"status"];
     [playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
 }
-- (void)playErrorHud
-{
-    [self.ActivityIndicatorView setHidden:YES];
-    self.hud.labelText = @"网络异常,请稍后再试";
-    [self.hud show:YES];
-    [self.hud hide:YES afterDelay:3];
-}
+
 /**
  *  通过KVO监控播放器状态
  *
@@ -187,6 +161,7 @@ static double moveTime = 0;
  *  @param context 上下文
  */
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
     AVPlayerItem *playerItem=object;
     if ([keyPath isEqualToString:@"status"]) {
         AVPlayerStatus status= [[change objectForKey:@"new"] intValue];
@@ -198,8 +173,15 @@ static double moveTime = 0;
             [self.ActivityIndicatorView setHidden:YES];
         }else if (status ==AVPlayerItemStatusFailed )
         {
+
+//            [self performSelector:@selector(TouchComeBack:) withObject:nil afterDelay:3];
+            
+            [self removeObserverFromPlayerItem:playerItem];
             [self playErrorHud];
-            NSLog(@"播放失败");
+            NSArray *arr = [NSObject keyPathsForValuesAffectingValueForKey:@"status"].allObjects;
+            
+            NSLog(@"-+--------播放失败%lu",(unsigned long)arr.count);
+            
         }
     }else if([keyPath isEqualToString:@"loadedTimeRanges"]){
         NSArray *array=playerItem.loadedTimeRanges;
@@ -210,22 +192,24 @@ static double moveTime = 0;
 //        NSLog(@"共缓冲：%.2f",totalBuffer);
     }
 }
-
+#pragma -mark 返回按钮
 - (IBAction)TouchComeBack:(id)sender {
-     self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+         self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+#pragma -mark 暂停按钮
 
 - (IBAction)TouchPlayOrPause:(id)sender {
-    
-    if(self.player.rate==0){ //说明时暂停
-        [self.player play];
-        self.PlayOrPause.selected = NO;
-        [self recycleOrShow:nil];
-    }else if(self.player.rate==1){//正在播放
-        [self.player pause];
-        self.PlayOrPause.selected = YES;
-    }
+//    
+//    if(self.player.rate==0){ //说明时暂停
+//        [self.player play];
+//        self.PlayOrPause.selected = NO;
+//        [self recycleOrShow:nil];
+//    }else if(self.player.rate==1){//正在播放
+//        [self.player pause];
+//        self.PlayOrPause.selected = YES;
+//    }
 }
 
 /**
@@ -236,7 +220,6 @@ static double moveTime = 0;
 -(void)playbackFinished:(NSNotification *)notification{
     NSLog(@"视频播放完成.");
     [self noHeidden];
-
     [self removeNotification];
 }
 /**
@@ -246,6 +229,27 @@ static double moveTime = 0;
  */
 - (void)playerERROR:(NSNotification *)notification{
     NSLog(@"播放失败");
+}
+
+#pragma -mark 点击播放按钮的动画
+- (IBAction)recycleOrShow:(UITapGestureRecognizer *)sender {
+    NSLog(@"点击了");;
+    if (_Hidden ==NO && self.player.rate==0) {
+
+        
+        [self.player play];
+        self.PlayOrPause.selected = NO;
+        [self heidden];
+        
+    }else if (self.player.rate==1)
+    {
+        [self.player pause];
+        self.PlayOrPause.selected = YES;
+        [self noHeidden];
+    }
+    
+
+   
 }
 /**
  *  点击手势收缩控件
@@ -262,7 +266,7 @@ static double moveTime = 0;
         
     }];
     _Hidden = YES;
-
+    
 }
 -(void)noHeidden
 {
@@ -279,19 +283,7 @@ static double moveTime = 0;
     }];
     _Hidden = NO;
 }
-- (IBAction)recycleOrShow:(UITapGestureRecognizer *)sender {
-    NSLog(@"点击了");;
-    if (_Hidden ==NO) {
-
-        [self heidden];
-        
-    }else
-    {
-        [self noHeidden];
-    }
-   
-}
-
+#pragma -mark 监测用户触屏后无操作的动画
 - (NSTimer *)watchTouch
 {
     if (!_watchTouch) {
@@ -343,6 +335,7 @@ static double moveTime = 0;
     }
     
 }
+
 #define H (ABS(point.x/point.y)>1.5) //水平
 #define V (ABS(point.y/point.x)>1.5) //垂直
 
@@ -400,10 +393,19 @@ static double moveTime = 0;
     
     
 }
+#pragma -mark MBProgressHUD--delegate
 - (void)hudWasHidden:(MBProgressHUD *)hud
 {
     [self TouchComeBack:hud];
 }
+- (void)playErrorHud
+{
+    [self.ActivityIndicatorView setHidden:YES];
+    self.hud.labelText = @"网络异常,请稍后再试";
+    [self.hud show:YES];
+    [self.hud hide:YES afterDelay:3];
+}
+#pragma -mark 懒加载
 -(MBProgressHUD *)hud
 {
     if (!_hud) {
