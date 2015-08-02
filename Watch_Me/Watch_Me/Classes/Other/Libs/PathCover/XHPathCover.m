@@ -412,7 +412,7 @@ NSString *const XHBirthdayKey = @"XHBirthday";
 //    UIVisualEffectView *bgeffect=[[UIVisualEffectView alloc]initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
 //    bgeffect.frame=CGRectMake(0, 0 , self.showView.frame.size.width-100, 24);
 //    [_showView addSubview:bgeffect];
-    _birthdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(93, 42, self.showView.frame.size.width, 24)];
+    _birthdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(93, 42, self.showView.frame.size.width*3/4, 50)];
     _birthdayLabel.textColor = [UIColor whiteColor];
     _birthdayLabel.backgroundColor = [UIColor clearColor];
 //    _birthdayLabel.shadowColor = [UIColor blackColor];

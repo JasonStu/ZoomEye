@@ -14,6 +14,9 @@
 #import "WmePlayerTableViewController.h"
 #import "WmeFMDBTool.h"
 #import "UMSocial.h"
+#import "Reachability.h"
+#import "AFNetworking.h"
+#import "MBProgressHUD.h"
 #define ShareKey @"5590ae1b67e58ecca200062b"
 #define XJHWidth ([[UIScreen mainScreen] bounds].size.width)
 #define kImageWidth self.view.bounds.size.width
@@ -39,6 +42,8 @@ static CGFloat down = 200;
     [super viewDidDisappear:animated];
     [self removeProgressTimer2];
     [self removeProgressTimer];
+
+    
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -96,10 +101,48 @@ static CGFloat down = 200;
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+- (void)WanOR3G
+{
+
+    AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];
+    [mgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        MBProgressHUD *mbHub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        // 当网络状态发生改变的时候调用这个block
+        switch (status) {
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                NSLog(@"WIFI");
+                [self presentInPlayingVc];
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                mbHub.margin = 12.0f;
+                mbHub.dimBackground = YES;
+                mbHub.mode = MBProgressHUDModeText;
+                mbHub.labelText = @"当前网络为蜂窝数据!";
+                [self performSelector:@selector(presentInPlayingVc) withObject:nil afterDelay:1.5];
+                [mbHub hide:YES afterDelay:1];
+                NSLog(@"自带网络");
+                break;
+                
+            case AFNetworkReachabilityStatusNotReachable:
+                NSLog(@"没有网络");
+                break;
+                
+            case AFNetworkReachabilityStatusUnknown:
+                NSLog(@"未知网络");
+                break;
+            default:
+                break;
+        }
+    }];
+    // 开始监控
+    [mgr startMonitoring];
+
+}
 - (void)playMovie:(UIButton *)button
 {
     NSLog(@"button点击了");
-    [self presentInPlayingVc];
+//    [self presentInPlayingVc];
+    [self WanOR3G];
     
 }
 - (void)presentInPlayingVc
@@ -107,13 +150,16 @@ static CGFloat down = 200;
     WmePlayingViewController *play = [[WmePlayingViewController alloc]init];
     play.url = self.model.url.m3u8;
     play.title = self.model.title;
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     play.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self.navigationController presentViewController:play animated:NO completion:nil];
 }
 - (void)touchMe:(UITapGestureRecognizer *)tap
 {
      NSLog(@"点击了");
-    [self presentInPlayingVc];
+//    [self presentInPlayingVc];
+    [self WanOR3G];
+    
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -237,7 +283,6 @@ static CGFloat down = 200;
     WmePlayerTableViewController *player = [[WmePlayerTableViewController alloc]init];
     player.listModel = self.model;
     [self.navigationController pushViewController:player animated:YES];
-    NSLog(@"点击了主页");
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

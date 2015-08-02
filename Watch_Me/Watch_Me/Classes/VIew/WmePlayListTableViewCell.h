@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 @class WmeTableModel;
 @interface WmePlayListTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *movieImageView;
-@property (weak, nonatomic) IBOutlet UILabel *movieTitle;
-@property (weak, nonatomic) IBOutlet UILabel *movieDes;
-@property (weak, nonatomic) IBOutlet UILabel *moviePlayCount;
+@property (strong, nonatomic) IBOutlet UIImageView *movieImageView;
+@property (strong, nonatomic) IBOutlet UILabel *movieTitle;
+@property (strong, nonatomic) IBOutlet UILabel *movieDes;
+@property (strong, nonatomic) IBOutlet UILabel *moviePlayCount;
+@property (strong, nonatomic) IBOutlet UILabel *movieTime;
+
 @property (nonatomic, strong) WmeTableModel *listModel;
 @end

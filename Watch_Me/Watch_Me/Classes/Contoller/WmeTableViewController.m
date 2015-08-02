@@ -20,8 +20,10 @@
 #import "WmePlayerTableViewController.h"
 #import "FRDLivelyButton.h"
 #import "WmeOtherViewController.h"
+#import "UIScrollView+EmptyDataSet.h"
+#import "MBProgressHUD.h"
 static int count = 1;
-@interface WmeTableViewController ()<UINavigationControllerDelegate>
+@interface WmeTableViewController ()<UINavigationControllerDelegate,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource>
 
 @property (nonatomic, strong) NSMutableArray *homeArray;
 @property (assign, nonatomic) CGPoint lastContentOffset;
@@ -37,11 +39,14 @@ static int count = 1;
     self.tableView.backgroundColor = [UIColor grayColor];
   
     self.navigationController.delegate = self;
+    self.tableView.emptyDataSetDelegate = self;
+    self.tableView.emptyDataSetSource = self;
+    
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+//    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     // 马上进入刷新状态
     [self.tableView.header beginRefreshing];
-//    [self.tableView.footer beginRefreshing];
 
     [self.tableView registerNib:[UINib nibWithNibName:@"DiceTableViewCell" bundle:nil] forCellReuseIdentifier:@"DiceTableViewCell"];
     UIColor * color = [UIColor whiteColor];
@@ -53,20 +58,17 @@ static int count = 1;
     [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:_button];
     self.navigationItem.leftBarButtonItem = buttonItem;
-    
-  
-    
 }
 - (void)buttonAction:(UIButton *)button
 {
     WmeOtherViewController *other = [[WmeOtherViewController alloc]init];
     [self.navigationController pushViewController:other animated:YES];
-
-
 }
 -(void)loadNewData
 {
-    
+    MBProgressHUD *mbHub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    mbHub.margin = 12.0f;
+    mbHub.dimBackground = YES;
     NSString *url = @"http://ditto.short.tv/api/v1/videos?page=1";
     AFHTTPSessionManager  *afn = [AFHTTPSessionManager manager];
     __weak WmeTableViewController *W_m = self;
@@ -76,11 +78,18 @@ static int count = 1;
         [W_m.homeArray addObjectsFromArray:array];
         [W_m.tableView reloadData];
         [W_m.tableView.header endRefreshing ];
+        mbHub.labelText = @"Loading!";
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        count =1;
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [W_m.tableView.header endRefreshing ];
         NSLog(@"没有更多的数据了");
+        count = 0;
+        mbHub.mode = MBProgressHUDModeText;
+        mbHub.labelText = @"无网络!";
+        [mbHub hide:YES afterDelay:1];
     }];
-    count =1;
+    
 }
 - (void)loadMoreData
 {
@@ -189,7 +198,7 @@ static int count = 1;
     
     
 }
-#warning UINavigationControllerDelegate 代理方法
+#pragma mark UINavigationControllerDelegate 代理方法
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     if ( [viewController isKindOfClass:[WmeMovieViewController class]]) {
@@ -199,6 +208,63 @@ static int count = 1;
         [navigationController setNavigationBarHidden:NO animated:animated];
     }
 }
+#pragma mark - DZNEmptyDataSetSource Methods
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"网络连接失败！";
+    UIFont *font = [UIFont boldSystemFontOfSize:15.0];
+    UIColor *textColor = [UIColor whiteColor];
+    NSMutableDictionary *attributes = [NSMutableDictionary new];
+    
+    if (font) [attributes setObject:font forKey:NSFontAttributeName];
+    if (textColor) [attributes setObject:textColor forKey:NSForegroundColorAttributeName];
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"无法从网络上读取数据，请判断设备是否链接蜂窝数据或无线网络！";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0],
+                                 NSForegroundColorAttributeName: [UIColor whiteColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"wife"];
+}
+#pragma mark - DZNEmptyDataSetDelegate Methods
+
+//- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+//{
+//    return YES;
+//}
+//
+//- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
+//{
+//    return YES;
+//}
+//
+//- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
+//{
+//    return YES;
+//}
+
+- (void)emptyDataSetDidTapView:(UIScrollView *)scrollView
+{
+    NSLog(@"%s",__FUNCTION__);
+    
+    [self loadNewData];
+}
+
 -(WmeTableModel *)model
 {
     if (!_model) {

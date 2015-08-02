@@ -16,11 +16,20 @@
 {
     _listModel = listModel;
     [self.movieImageView sd_setImageWithURL:[NSURL URLWithString:self.listModel.image]];
-    self.movieTitle.text = listModel.title;
+    self.movieTitle.text = [NSString stringWithFormat:@"# %@",listModel.title];
     self.movieDes.text = listModel.channel.title;
     self.moviePlayCount.text = [NSString stringWithFormat:@"☆ %0.2f万",listModel.play_count*0.0001];
     self.movieImageView.layer.masksToBounds = YES;
     self.movieImageView.layer.cornerRadius = 5;
+    self.movieTime.text = [self strWithTimeInterval:[listModel.duration intValue]];
+
+    
+}
+- (NSString *)strWithTimeInterval:(int)interval
+{
+    int m = interval / 60;
+    int s = (int)interval % 60;
+    return [NSString stringWithFormat:@"%02d: %02d", m , s];
 }
 
 

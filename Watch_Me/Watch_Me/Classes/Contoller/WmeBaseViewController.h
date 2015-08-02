@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIImageView+WebCache.h"
+#import "UIScrollView+EmptyDataSet.h"
 @interface WmeBaseViewController : UIViewController
 - (NSString *)strWithTimeInterval:(int)interval;
 @end

@@ -120,10 +120,11 @@ static double moveTime = 0;
  *  给播放器添加进度更新
  */
 -(void)addProgressObserver{
-    AVPlayerItem *playerItem=self.player.currentItem;
-    UISlider *slider=self.Progress;
+    __weak AVPlayerItem *playerItem=self.player.currentItem;
+    __weak UISlider *slider=self.Progress;
     //这里设置每秒执行一次
     __weak WmePlayingViewController * vc = self;
+    
     self.av = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1.0, 1.0) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
         float current=CMTimeGetSeconds(time);
         float total=CMTimeGetSeconds([playerItem duration]);
@@ -173,15 +174,10 @@ static double moveTime = 0;
             [self.ActivityIndicatorView setHidden:YES];
         }else if (status ==AVPlayerItemStatusFailed )
         {
-
-//            [self performSelector:@selector(TouchComeBack:) withObject:nil afterDelay:3];
-            
-            [self removeObserverFromPlayerItem:playerItem];
             [self playErrorHud];
+            [self removeObserverFromPlayerItem:playerItem];
             NSArray *arr = [NSObject keyPathsForValuesAffectingValueForKey:@"status"].allObjects;
-            
             NSLog(@"-+--------播放失败%lu",(unsigned long)arr.count);
-            
         }
     }else if([keyPath isEqualToString:@"loadedTimeRanges"]){
         NSArray *array=playerItem.loadedTimeRanges;
@@ -189,7 +185,7 @@ static double moveTime = 0;
         float startSeconds = CMTimeGetSeconds(timeRange.start);
         float durationSeconds = CMTimeGetSeconds(timeRange.duration);
         NSTimeInterval totalBuffer = startSeconds + durationSeconds;//缓冲总长度
-//        NSLog(@"共缓冲：%.2f",totalBuffer);
+        NSLog(@"共缓冲：%.2f",totalBuffer);
     }
 }
 #pragma -mark 返回按钮
@@ -201,15 +197,15 @@ static double moveTime = 0;
 #pragma -mark 暂停按钮
 
 - (IBAction)TouchPlayOrPause:(id)sender {
-//    
-//    if(self.player.rate==0){ //说明时暂停
-//        [self.player play];
-//        self.PlayOrPause.selected = NO;
-//        [self recycleOrShow:nil];
-//    }else if(self.player.rate==1){//正在播放
-//        [self.player pause];
-//        self.PlayOrPause.selected = YES;
-//    }
+    
+    if(self.player.rate==0){ //说明时暂停
+        [self.player play];
+        self.PlayOrPause.selected = NO;
+        [self recycleOrShow:nil];
+    }else if(self.player.rate==1){//正在播放
+        [self.player pause];
+        self.PlayOrPause.selected = YES;
+    }
 }
 
 /**
@@ -233,27 +229,14 @@ static double moveTime = 0;
 
 #pragma -mark 点击播放按钮的动画
 - (IBAction)recycleOrShow:(UITapGestureRecognizer *)sender {
-    NSLog(@"点击了");;
-    if (_Hidden ==NO && self.player.rate==0) {
-
-        
-        [self.player play];
-        self.PlayOrPause.selected = NO;
+    if (_Hidden ==NO ) {
         [self heidden];
-        
-    }else if (self.player.rate==1)
+    }else
     {
-        [self.player pause];
-        self.PlayOrPause.selected = YES;
         [self noHeidden];
     }
-    
-
-   
 }
-/**
- *  点击手势收缩控件
- */
+#pragma -mark 点击手势收缩控件
 - (void)heidden
 {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
@@ -266,7 +249,6 @@ static double moveTime = 0;
         
     }];
     _Hidden = YES;
-    
 }
 -(void)noHeidden
 {
@@ -283,7 +265,7 @@ static double moveTime = 0;
     }];
     _Hidden = NO;
 }
-#pragma -mark 监测用户触屏后无操作的动画
+#pragma -mark 监测用户触屏后无操作的定时器
 - (NSTimer *)watchTouch
 {
     if (!_watchTouch) {
@@ -325,6 +307,7 @@ static double moveTime = 0;
 //        NSLog(@"%d",time);
        [self.player seekToTime:CMTimeMakeWithSeconds(time, self.player.currentTime.timescale)];
         [self.player play];
+        
     }else if (self.PlayOrPause.selected == YES)
     {
         [self.player pause];
@@ -335,10 +318,9 @@ static double moveTime = 0;
     }
     
 }
-
+#pragma mark 拖拽手势的方法
 #define H (ABS(point.x/point.y)>1.5) //水平
 #define V (ABS(point.y/point.x)>1.5) //垂直
-
 - (IBAction)PanControllerMovieTime:(UIPanGestureRecognizer *)sender {
 
     static double pointY = 0.5;
@@ -349,9 +331,6 @@ static double moveTime = 0;
     // 1.获得当前拖拽的位置
     // 获取到滑块平移的位置
     CGPoint point =  [sender translationInView:sender.view];
-//    NSLog(@"%f",point.x);
-//    NSLog(@"----拖拽百分比%f",point.x/self.container.width);
-    
     if (H) {
         [self.player pause];
         int ac = point.x*0.3;
@@ -367,14 +346,14 @@ static double moveTime = 0;
         if (self.PlayOrPause.selected == NO) {
             [self.player play];
         }
-
+        
     }else if (V)
     {
         ;
         CGFloat volome = -point.y / self.container.height+pointY;
         
         if (volome <0) {
-           
+            
             self.player.volume = 0;
         }else if (volome > 1 )
         {
@@ -382,17 +361,11 @@ static double moveTime = 0;
         }else
         {
             self.player.volume = volome;
-            NSLog(@"%f",volome);
-
-           
-           
         }
-    
-        
     }
     
-    
 }
+
 #pragma -mark MBProgressHUD--delegate
 - (void)hudWasHidden:(MBProgressHUD *)hud
 {
@@ -405,6 +378,7 @@ static double moveTime = 0;
     [self.hud show:YES];
     [self.hud hide:YES afterDelay:3];
 }
+
 #pragma -mark 懒加载
 -(MBProgressHUD *)hud
 {

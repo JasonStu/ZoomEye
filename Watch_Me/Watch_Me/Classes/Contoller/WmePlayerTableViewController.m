@@ -121,6 +121,7 @@
     WmePlayListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieListCell" forIndexPath:indexPath];
     WmeTableModel *model  = self.listArray[indexPath.row];
     cell.listModel = model;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

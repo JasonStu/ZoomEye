@@ -62,8 +62,6 @@
 		3F6B696B1B6B8C220089B993 /* UMSnsAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F6B695D1B6B8C220089B993 /* UMSnsAccountViewController.xib */; };
 		3F6B696C1B6B8C220089B993 /* UMSShareListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F6B695E1B6B8C220089B993 /* UMSShareListController.xib */; };
 		3F6B696D1B6B8C220089B993 /* UMSocialSDKResourcesNew.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3F6B695F1B6B8C220089B993 /* UMSocialSDKResourcesNew.bundle */; };
-		3F6B696F1B6B8C900089B993 /* zoomEye.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6B696E1B6B8C900089B993 /* zoomEye.png */; };
-		3F7AF5341B68699D006A5B90 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7AF5261B68699D006A5B90 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3F7AF54B1B687C1C006A5B90 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7AF5401B687C1C006A5B90 /* circle.png */; };
 		3F7AF54C1B687C1C006A5B90 /* circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7AF5411B687C1C006A5B90 /* circle@2x.png */; };
 		3F7AF54D1B687C1C006A5B90 /* meicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7AF5421B687C1C006A5B90 /* meicon.png */; };
@@ -137,6 +135,10 @@
 		3FB017CB1B65D12100EA3E3E /* WmePlayingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB017C91B65D12100EA3E3E /* WmePlayingViewController.xib */; };
 		3FB87CB51B64724C00505F64 /* WmeMovieTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB87CB31B64724C00505F64 /* WmeMovieTableViewCell.m */; };
 		3FB87CBE1B64C4DF00505F64 /* WmeBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB87CBD1B64C4DF00505F64 /* WmeBaseNavigationController.m */; };
+		3FBCFED31B6DDE2E00916EC7 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBCFED21B6DDE2E00916EC7 /* UIScrollView+EmptyDataSet.m */; };
+		3FBCFEE01B6DF07C00916EC7 /* placeholder_dropbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FBCFEDE1B6DF07C00916EC7 /* placeholder_dropbox.png */; };
+		3FBCFEE11B6DF07C00916EC7 /* placeholder_dropbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FBCFEDF1B6DF07C00916EC7 /* placeholder_dropbox@2x.png */; };
+		3FBCFEE71B6E085700916EC7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBCFEE61B6E085700916EC7 /* MBProgressHUD.m */; };
 		3FE306591B68ECBF0096AB40 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE306501B68ECBF0096AB40 /* FMDatabase.m */; };
 		3FE3065A1B68ECBF0096AB40 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE306521B68ECBF0096AB40 /* FMDatabaseAdditions.m */; };
 		3FE3065B1B68ECBF0096AB40 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE306541B68ECBF0096AB40 /* FMDatabasePool.m */; };
@@ -265,9 +267,6 @@
 		3F6B695E1B6B8C220089B993 /* UMSShareListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSShareListController.xib; sourceTree = "<group>"; };
 		3F6B695F1B6B8C220089B993 /* UMSocialSDKResourcesNew.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResourcesNew.bundle; sourceTree = "<group>"; };
 		3F6B69601B6B8C220089B993 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UMSocialLocalizable.strings"; sourceTree = "<group>"; };
-		3F6B696E1B6B8C900089B993 /* zoomEye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zoomEye.png; path = UMSocial_Sdk_4.2.2/zoomEye.png; sourceTree = "<group>"; };
-		3F7AF5251B68699D006A5B90 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		3F7AF5261B68699D006A5B90 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3F7AF5401B687C1C006A5B90 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
 		3F7AF5411B687C1C006A5B90 /* circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle@2x.png"; sourceTree = "<group>"; };
 		3F7AF5421B687C1C006A5B90 /* meicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meicon.png; sourceTree = "<group>"; };
@@ -411,6 +410,12 @@
 		3FB87CB31B64724C00505F64 /* WmeMovieTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WmeMovieTableViewCell.m; sourceTree = "<group>"; };
 		3FB87CBC1B64C4DF00505F64 /* WmeBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WmeBaseNavigationController.h; sourceTree = "<group>"; };
 		3FB87CBD1B64C4DF00505F64 /* WmeBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WmeBaseNavigationController.m; sourceTree = "<group>"; };
+		3FBCFED11B6DDE2E00916EC7 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		3FBCFED21B6DDE2E00916EC7 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		3FBCFEDE1B6DF07C00916EC7 /* placeholder_dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder_dropbox.png; sourceTree = "<group>"; };
+		3FBCFEDF1B6DF07C00916EC7 /* placeholder_dropbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder_dropbox@2x.png"; sourceTree = "<group>"; };
+		3FBCFEE51B6E085700916EC7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		3FBCFEE61B6E085700916EC7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3FE3064F1B68ECBF0096AB40 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		3FE306501B68ECBF0096AB40 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		3FE306511B68ECBF0096AB40 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -633,15 +638,6 @@
 			path = SocialSDKXib;
 			sourceTree = "<group>";
 		};
-		3F7AF5241B68699D006A5B90 /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				3F7AF5251B68699D006A5B90 /* MBProgressHUD.h */,
-				3F7AF5261B68699D006A5B90 /* MBProgressHUD.m */,
-			);
-			path = MBProgressHUD;
-			sourceTree = "<group>";
-		};
 		3F7AF53E1B687C1C006A5B90 /* PathCover */ = {
 			isa = PBXGroup;
 			children = (
@@ -823,12 +819,12 @@
 		3F9E1F5E1B61DFB0003007D8 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				3F6B696E1B6B8C900089B993 /* zoomEye.png */,
+				3FBCFEE41B6E085700916EC7 /* MBProgressHUD */,
+				3FBCFED01B6DDE2E00916EC7 /* DZNEmptyDataSet */,
 				3F6B69411B6B8C220089B993 /* UMSocial_Sdk_4.2.2 */,
 				3F9A77121B6A066900043503 /* FRDLivelyButton */,
 				3FE3064E1B68ECBF0096AB40 /* FMDB */,
 				3F7AF53E1B687C1C006A5B90 /* PathCover */,
-				3F7AF5241B68699D006A5B90 /* MBProgressHUD */,
 				3F953F511B675F1900843F05 /* Reachability */,
 				3F67BD1F1B6258BE0090F842 /* ASFSharedViewTransition */,
 				3F67BCEB1B6214CE0090F842 /* SDWebImage */,
@@ -974,6 +970,8 @@
 		3F9E1FD31B61DFB0003007D8 /* VIew */ = {
 			isa = PBXGroup;
 			children = (
+				3FBCFEDE1B6DF07C00916EC7 /* placeholder_dropbox.png */,
+				3FBCFEDF1B6DF07C00916EC7 /* placeholder_dropbox@2x.png */,
 				3F67BCE61B6213080090F842 /* DiceTableViewCell.h */,
 				3F67BCE71B6213080090F842 /* DiceTableViewCell.m */,
 				3F67BCE81B6213080090F842 /* DiceTableViewCell.xib */,
@@ -987,6 +985,24 @@
 				3F9A77571B6A3FD800043503 /* WmeEnShareTableViewCell.xib */,
 			);
 			path = VIew;
+			sourceTree = "<group>";
+		};
+		3FBCFED01B6DDE2E00916EC7 /* DZNEmptyDataSet */ = {
+			isa = PBXGroup;
+			children = (
+				3FBCFED11B6DDE2E00916EC7 /* UIScrollView+EmptyDataSet.h */,
+				3FBCFED21B6DDE2E00916EC7 /* UIScrollView+EmptyDataSet.m */,
+			);
+			path = DZNEmptyDataSet;
+			sourceTree = "<group>";
+		};
+		3FBCFEE41B6E085700916EC7 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				3FBCFEE51B6E085700916EC7 /* MBProgressHUD.h */,
+				3FBCFEE61B6E085700916EC7 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		3FE3064E1B68ECBF0096AB40 /* FMDB */ = {
@@ -1102,15 +1118,16 @@
 				3F6B69401B6B89520089B993 /* WmeAboutMeViewController.xib in Resources */,
 				3F6B69691B6B8C220089B993 /* UMShareEditViewControlleriPad.xib in Resources */,
 				3F67BCE11B61EB920090F842 /* MJRefresh.bundle in Resources */,
+				3FBCFEE01B6DF07C00916EC7 /* placeholder_dropbox.png in Resources */,
 				3F6B69651B6B8C220089B993 /* UMSCommentDetailController.xib in Resources */,
 				3F9E1F3D1B61DF41003007D8 /* Images.xcassets in Resources */,
 				3F7AF55A1B68B04A006A5B90 /* WmePlayListTableViewCell.xib in Resources */,
 				3F7AF54F1B687C1C006A5B90 /* pullrefresh.aif in Resources */,
 				3F6B696B1B6B8C220089B993 /* UMSnsAccountViewController.xib in Resources */,
-				3F6B696F1B6B8C900089B993 /* zoomEye.png in Resources */,
 				3F67BD2D1B627B410090F842 /* bofang@2x.png in Resources */,
 				3F6B696A1B6B8C220089B993 /* UMSLoginViewController.xib in Resources */,
 				3F953F501B67320A00843F05 /* SourceHanSansSC-Normal.otf in Resources */,
+				3FBCFEE11B6DF07C00916EC7 /* placeholder_dropbox@2x.png in Resources */,
 				3F7AF54E1B687C1C006A5B90 /* MenuBackground@2x.png in Resources */,
 				3F9A771A1B6A087700043503 /* WmeOtherViewController.xib in Resources */,
 				3F6B696D1B6B8C220089B993 /* UMSocialSDKResourcesNew.bundle in Resources */,
@@ -1183,6 +1200,7 @@
 				3F9E20151B61E5C8003007D8 /* WmeChannelModel.m in Sources */,
 				3F67BD191B6214CE0090F842 /* UIImage+GIF.m in Sources */,
 				3F9E20011B61DFB0003007D8 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				3FBCFED31B6DDE2E00916EC7 /* UIScrollView+EmptyDataSet.m in Sources */,
 				3F9E20041B61DFB0003007D8 /* UIButton+AFNetworking.m in Sources */,
 				3F9E1FDD1B61DFB0003007D8 /* AFURLResponseSerialization.m in Sources */,
 				3F9E1F351B61DF41003007D8 /* AppDelegate.m in Sources */,
@@ -1211,6 +1229,7 @@
 				3F9E1FF91B61DFB0003007D8 /* MJIvar.m in Sources */,
 				3F67BD131B6214CE0090F842 /* SDWebImageDecoder.m in Sources */,
 				3F67BD1A1B6214CE0090F842 /* UIImage+MultiFormat.m in Sources */,
+				3FBCFEE71B6E085700916EC7 /* MBProgressHUD.m in Sources */,
 				3F9E1FE11B61DFB0003007D8 /* MASCompositeConstraint.m in Sources */,
 				3F9E1FFD1B61DFB0003007D8 /* MJTypeEncoding.m in Sources */,
 				3F9E200F1B61E093003007D8 /* WmeTableModel.m in Sources */,
@@ -1220,7 +1239,6 @@
 				3F67BCD61B61EB920090F842 /* MJRefreshFooter.m in Sources */,
 				3F9E1F321B61DF41003007D8 /* main.m in Sources */,
 				3F67BCE21B61EB920090F842 /* MJRefreshConst.m in Sources */,
-				3F7AF5341B68699D006A5B90 /* MBProgressHUD.m in Sources */,
 				3F9E1FF71B61DFB0003007D8 /* MJConst.m in Sources */,
 				3F67BCDE1B61EB920090F842 /* MJRefreshGifHeader.m in Sources */,
 				3F9E1FD41B61DFB0003007D8 /* UIImage+NJ.m in Sources */,
