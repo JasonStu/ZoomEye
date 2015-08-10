@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1072</int>
-		<string key="IBDocument.SystemVersion">13A603</string>
-		<string key="IBDocument.InterfaceBuilderVersion">4514</string>
-		<string key="IBDocument.AppKitVersion">1265</string>
-		<string key="IBDocument.HIToolboxVersion">695.00</string>
+		<string key="IBDocument.SystemVersion">14E46</string>
+		<string key="IBDocument.InterfaceBuilderVersion">6751</string>
+		<string key="IBDocument.AppKitVersion">1348.17</string>
+		<string key="IBDocument.HIToolboxVersion">758.70</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">3747</string>
+			<string key="NS.object.0">6736</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBMKMapView</string>
@@ -35,7 +35,7 @@
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUIView" id="171606265">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">1306</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUITextView" id="208946249">
@@ -44,6 +44,8 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrameSize">{533, 221}</string>
 						<reference key="NSSuperview" ref="171606265"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="880969143"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -59,6 +61,7 @@
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">1</int>
+							<int key="weightCategory">0</int>
 							<double key="pointSize">14</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
@@ -77,6 +80,8 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrameSize">{533, 44}</string>
 								<reference key="NSSuperview" ref="880969143"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="520036346"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
@@ -86,6 +91,8 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{40, 0}, {36, 33}}</string>
 								<reference key="NSSuperview" ref="880969143"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="253974065"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -104,10 +111,11 @@
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="78195537">
 									<int key="type">2</int>
+									<int key="weightCategory">30</int>
 									<double key="pointSize">15</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="971850755">
-									<string key="NSName">HelveticaNeue-Bold</string>
+								<object class="NSFont" key="IBUIFont" id="190703324">
+									<string key="NSName">HelveticaNeue</string>
 									<double key="NSSize">15</double>
 									<int key="NSfFlags">16</int>
 								</object>
@@ -118,6 +126,8 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{275, 7}, {30, 30}}</string>
 								<reference key="NSSuperview" ref="880969143"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="967490862"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUIContentMode">4</int>
 								<int key="IBUITag">1001</int>
@@ -139,7 +149,7 @@
 									<string key="NSResourceName">UMS_tencent_off.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="78195537"/>
-								<reference key="IBUIFont" ref="971850755"/>
+								<reference key="IBUIFont" ref="190703324"/>
 							</object>
 							<object class="IBUIButton" id="967490862">
 								<reference key="NSNextResponder" ref="880969143"/>
@@ -147,6 +157,8 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{331, 7}, {30, 30}}</string>
 								<reference key="NSSuperview" ref="880969143"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="408496366"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUIContentMode">4</int>
 								<int key="IBUITag">1000</int>
@@ -168,7 +180,7 @@
 									<string key="NSResourceName">UMS_sina_off.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="78195537"/>
-								<reference key="IBUIFont" ref="971850755"/>
+								<reference key="IBUIFont" ref="190703324"/>
 							</object>
 							<object class="IBUIButton" id="408496366">
 								<reference key="NSNextResponder" ref="880969143"/>
@@ -176,6 +188,8 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{384, 7}, {30, 30}}</string>
 								<reference key="NSSuperview" ref="880969143"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="439925023"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUIContentMode">4</int>
 								<int key="IBUITag">1001</int>
@@ -194,7 +208,7 @@
 								<reference key="IBUINormalTitleShadowColor" ref="316927490"/>
 								<reference key="IBUINormalBackgroundImage" ref="417529781"/>
 								<reference key="IBUIFontDescription" ref="78195537"/>
-								<reference key="IBUIFont" ref="971850755"/>
+								<reference key="IBUIFont" ref="190703324"/>
 							</object>
 							<object class="IBUIButton" id="439925023">
 								<reference key="NSNextResponder" ref="880969143"/>
@@ -202,6 +216,8 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{439, 7}, {30, 30}}</string>
 								<reference key="NSSuperview" ref="880969143"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="868835665"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUIContentMode">4</int>
 								<int key="IBUITag">1002</int>
@@ -223,7 +239,7 @@
 									<string key="NSResourceName">UMS_renren_off.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="78195537"/>
-								<reference key="IBUIFont" ref="971850755"/>
+								<reference key="IBUIFont" ref="190703324"/>
 							</object>
 							<object class="IBUIButton" id="868835665">
 								<reference key="NSNextResponder" ref="880969143"/>
@@ -231,6 +247,8 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{493, 7}, {30, 30}}</string>
 								<reference key="NSSuperview" ref="880969143"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="1009460338"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUIContentMode">4</int>
 								<int key="IBUITag">1003</int>
@@ -252,7 +270,7 @@
 									<string key="NSResourceName">UMS_douban_off.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="78195537"/>
-								<reference key="IBUIFont" ref="971850755"/>
+								<reference key="IBUIFont" ref="190703324"/>
 							</object>
 							<object class="IBMKMapView" id="943941939">
 								<reference key="NSNextResponder" ref="880969143"/>
@@ -260,6 +278,8 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{35, 80}, {460, 250}}</string>
 								<reference key="NSSuperview" ref="880969143"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIMultipleTouchEnabled">YES</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -270,6 +290,8 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{439, 45}, {73, 27}}</string>
 								<reference key="NSSuperview" ref="880969143"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="943941939"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -280,10 +302,11 @@
 								<reference key="IBUINormalTitleShadowColor" ref="316927490"/>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">2</int>
+									<int key="weightCategory">30</int>
 									<double key="pointSize">13</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">HelveticaNeue-Bold</string>
+									<string key="NSName">HelveticaNeue</string>
 									<double key="NSSize">13</double>
 									<int key="NSfFlags">16</int>
 								</object>
@@ -292,6 +315,8 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{0, 220}, {533, 44}}</string>
 						<reference key="NSSuperview" ref="171606265"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="892771427"/>
 						<reference key="IBUIBackgroundColor" ref="187397936"/>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
@@ -302,6 +327,9 @@
 				</array>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{533, 260}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="208946249"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -309,12 +337,16 @@
 						<int key="NSID">2</int>
 					</object>
 				</object>
+				<object class="IBUISimulatedSizeMetrics" key="IBUISimulatedDestinationMetrics">
+					<string key="IBUISimulatedSizeMetricsClass">IBUISimulatedFreeformSizeMetricsSentinel</string>
+					<string key="IBUIDisplayName">Freeform</string>
+				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<bool key="usesAutoincrementingIDs">NO</bool>
-			<array class="NSMutableArray" key="connectionRecords">
+			<array key="connectionRecords">
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">closeLocationButton</string>
@@ -557,7 +589,31 @@
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">UIScrollView</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="emptyDataSetDelegate">id</string>
+						<string key="emptyDataSetSource">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="emptyDataSetDelegate">
+							<string key="name">emptyDataSetDelegate</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="emptyDataSetSource">
+							<string key="name">emptyDataSetSource</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../Watch_Me/Classes/Other/Libs/DZNEmptyDataSet/UIScrollView+EmptyDataSet.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">YES</bool>
@@ -577,6 +633,5 @@
 			<string key="UMS_sina_off.png">{39, 39}</string>
 			<string key="UMS_tencent_off.png">{39, 39}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">3747</string>
 	</data>
 </archive>

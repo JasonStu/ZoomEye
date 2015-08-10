@@ -49,10 +49,12 @@ static int count = 1;
     [self.tableView.header beginRefreshing];
 
     [self.tableView registerNib:[UINib nibWithNibName:@"DiceTableViewCell" bundle:nil] forCellReuseIdentifier:@"DiceTableViewCell"];
+    
     UIColor * color = [UIColor whiteColor];
     NSDictionary * dict=[NSDictionary dictionaryWithObject:color forKey:UITextAttributeTextColor];
     self.navigationController.navigationBar.titleTextAttributes =dict;
     
+
     self.button = [[FRDLivelyButton alloc] initWithFrame:CGRectMake(0,0,30,28)];
     [_button setStyle:kFRDLivelyButtonStyleHamburger animated:YES];
     [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -63,6 +65,7 @@ static int count = 1;
 {
     WmeOtherViewController *other = [[WmeOtherViewController alloc]init];
     [self.navigationController pushViewController:other animated:YES];
+    
 }
 -(void)loadNewData
 {
@@ -79,7 +82,7 @@ static int count = 1;
         [W_m.tableView reloadData];
         [W_m.tableView.header endRefreshing ];
         mbHub.labelText = @"Loading!";
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [mbHub hide:self];
         count =1;
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [W_m.tableView.header endRefreshing ];

@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UIButton *enshrine;
 @property (nonatomic, strong) UIButton *share;
 @property (nonatomic, strong) UIButton *download;
+@property (nonatomic, strong) UIButton *homeView;
 +(CGFloat) cellHight:(NSString *)listModel;
 
 @end

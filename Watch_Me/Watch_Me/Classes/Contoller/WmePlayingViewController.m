@@ -35,11 +35,7 @@ static double moveTime = 0;
 @implementation WmePlayingViewController
 - (void)dealloc
 {
-    [self removeObserverFromPlayerItem:self.player.currentItem];
-    [self removeNotification];
-    [self removeTimer];
-    [self.player removeTimeObserver:self.av];
-    [self.player replaceCurrentItemWithPlayerItem:self.player.currentItem];
+    
 
 }
 - (void)viewDidAppear:(BOOL)animated
@@ -60,14 +56,13 @@ static double moveTime = 0;
     AVPlayerLayer *playerLayer=[AVPlayerLayer playerLayerWithPlayer:self.player];
     playerLayer.backgroundColor = [UIColor blackColor].CGColor;
     playerLayer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
-    playerLayer.videoGravity=AVLayerVideoGravityResizeAspectFill;//视频填充模式
+//    playerLayer.videoGravity=AVLayerVideoGravityResizeAspectFill;//视频填充模式
     [self.container.layer addSublayer:playerLayer];
     [self.Progress setThumbImage:[UIImage imageNamed:@"point"] forState:UIControlStateNormal];
     [self.Progress setThumbImage:[UIImage imageNamed:@"point"] forState:UIControlStateHighlighted];
     self.MovieTime.text = self.title;
     self.Alltime.text = @"00:00";
     self.StaryTime.text= @"00:00";
-
 }
 
 /**z
@@ -176,8 +171,8 @@ static double moveTime = 0;
         {
             [self playErrorHud];
             [self removeObserverFromPlayerItem:playerItem];
-            NSArray *arr = [NSObject keyPathsForValuesAffectingValueForKey:@"status"].allObjects;
-            NSLog(@"-+--------播放失败%lu",(unsigned long)arr.count);
+//            id info = [playerItem observationInfo];
+//            NSLog(@"%@",info);
         }
     }else if([keyPath isEqualToString:@"loadedTimeRanges"]){
         NSArray *array=playerItem.loadedTimeRanges;
@@ -185,13 +180,18 @@ static double moveTime = 0;
         float startSeconds = CMTimeGetSeconds(timeRange.start);
         float durationSeconds = CMTimeGetSeconds(timeRange.duration);
         NSTimeInterval totalBuffer = startSeconds + durationSeconds;//缓冲总长度
-        NSLog(@"共缓冲：%.2f",totalBuffer);
+//        NSLog(@"共缓冲：%.2f",totalBuffer);
     }
 }
 #pragma -mark 返回按钮
 - (IBAction)TouchComeBack:(id)sender {
+    [self removeObserverFromPlayerItem:self.player.currentItem];
+    [self removeNotification];
+    [self removeTimer];
+    [self.player removeTimeObserver:self.av];
+    [self.player replaceCurrentItemWithPlayerItem:self.player.currentItem];
     
-         self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma -mark 暂停按钮

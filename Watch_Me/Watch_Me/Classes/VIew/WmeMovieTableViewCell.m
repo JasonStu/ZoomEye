@@ -19,7 +19,7 @@
 #define MovieListHeight ([[UIScreen mainScreen] bounds].size.height-20)
 @interface WmeMovieTableViewCell ()
 
-@property (nonatomic, strong) UIView *homeView;
+
 @property (nonatomic, strong) UIImageView *nameImage;
 @property (nonatomic, strong) UILabel *auterName;
 @property (nonatomic, strong) UILabel *enShareLabel;
@@ -66,19 +66,25 @@
         
         self.share = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.contentView addSubview:_share];
-        [_share setBackgroundImage:[UIImage imageNamed:@"fenxiang"] forState:UIControlStateNormal];
+        [_share setImage:[UIImage imageNamed:@"fenxiang"] forState:UIControlStateNormal];
+        [self.share setImageEdgeInsets:(UIEdgeInsetsMake(0, 5, 0, 75))];
+//        self.share.backgroundColor = [UIColor redColor];
+        
+        
 
         self.enshrine = [UIButton buttonWithType:UIButtonTypeCustom];;
         [self.contentView addSubview:_enshrine];
-        [_enshrine setBackgroundImage:[UIImage imageNamed:@"aixin"] forState:UIControlStateNormal];
-        [_enshrine setBackgroundImage:[UIImage imageNamed:@"aixin2"] forState:UIControlStateSelected];
+        [_enshrine setImage:[UIImage imageNamed:@"aixin"] forState:UIControlStateNormal];
+        [_enshrine setImage:[UIImage imageNamed:@"aixin2"] forState:UIControlStateSelected];
+        [self.enshrine setImageEdgeInsets:(UIEdgeInsetsMake(0, 5, 0, 75))];
         
         self.download = [UIButton buttonWithType:UIButtonTypeCustom];;
-        [self.buttonView addSubview:_download];
-        [_download setBackgroundImage:[UIImage imageNamed:@"xiazai"] forState:UIControlStateNormal];
+        [self.contentView addSubview:_download];
+        [_download setImage:[UIImage imageNamed:@"xiazai"] forState:UIControlStateNormal];
+        [self.download setImageEdgeInsets:(UIEdgeInsetsMake(0, 5, 0, 75))];
         
-        self.homeView = [[UIView alloc]init];
-        [self.movieView addSubview:_homeView];
+        self.homeView = [[UIButton alloc]init];
+        [self.contentView addSubview:_homeView];
         self.homeView.backgroundColor = [UIColor blackColor];
         self.homeView.alpha = 0.2;
         self.homeView.layer.masksToBounds = YES;
@@ -169,21 +175,21 @@
     [_enshrine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws.buttonView.mas_left).with.offset(10);
         make.top.equalTo(ws.buttonView.mas_top).with.offset(10);
-        make.width.equalTo(@(20));
+        make.width.equalTo(@(100));
         make.height.equalTo (@(20));
     }];
     
     [_share mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws.buttonView.mas_left).with.offset(110);
         make.top.equalTo(ws.buttonView.mas_top).with.offset(10);
-        make.width.equalTo(@(20));
+        make.width.equalTo(@(100));
         make.height.equalTo (@(20));
     }];
     
     [_download mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(ws.buttonView.mas_left).with.offset(220);
         make.top.equalTo(ws.buttonView.mas_top).with.offset(10);
-        make.width.equalTo(@(20));
+        make.width.equalTo(@(100));
         make.height.equalTo (@(20));
     }];
     
@@ -260,6 +266,7 @@
     [self.nameImage sd_setImageWithURL:[NSURL URLWithString:model.channel.avatar]];
     self.auterName.text = model.channel.title;
     [self.movieView sd_setImageWithURL:[NSURL URLWithString:model.image]];
+    
     if ([[WmeFMDBTool findM3U8:model] isEqualToString:model.url.m3u8]) {
         self.enshrine.selected = YES;
     }

@@ -92,15 +92,19 @@ static CGFloat down = 200;
     
     //设置返回按钮
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(10, 25, 40, 40);
+    button.frame = CGRectMake(10, 25, 100, 40);
     [button setImage:[UIImage imageNamed:@"fanhui"] forState:UIControlStateNormal];
+    button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 60);
     [button addTarget:self action:@selector(ClickBack) forControlEvents:UIControlEventTouchUpInside];
+//    button.backgroundColor = [UIColor redColor];
     [self.view addSubview:button];
 }
+#pragma -mark 返回按钮
 - (void)ClickBack
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+#pragma -mark 网络监测
 - (void)WanOR3G
 {
 
@@ -138,13 +142,14 @@ static CGFloat down = 200;
     [mgr startMonitoring];
 
 }
+#pragma -mark 播放按钮
 - (void)playMovie:(UIButton *)button
 {
     NSLog(@"button点击了");
-//    [self presentInPlayingVc];
     [self WanOR3G];
     
 }
+#pragma -mark 推进播放页面
 - (void)presentInPlayingVc
 {
     WmePlayingViewController *play = [[WmePlayingViewController alloc]init];
@@ -154,6 +159,7 @@ static CGFloat down = 200;
     play.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self.navigationController presentViewController:play animated:NO completion:nil];
 }
+#pragma -mark top点击方法
 - (void)touchMe:(UITapGestureRecognizer *)tap
 {
      NSLog(@"点击了");
@@ -179,36 +185,44 @@ static CGFloat down = 200;
     [cell.auterHome addTarget:self action:@selector(goAuterHome:) forControlEvents:UIControlEventTouchUpInside];
     [cell.enshrine addTarget:self action:@selector(enshrine:) forControlEvents:UIControlEventTouchUpInside];
     [cell.share addTarget:self action:@selector(shareMe:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.homeView addTarget:self action:@selector(goAuterHome:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.download addTarget:self action:@selector(dowload:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSLog(@"????hight %f", [WmeMovieTableViewCell cellHight:self.model.Mdescription]);
+
     return [WmeMovieTableViewCell cellHight:self.model.Mdescription];
 }
+#pragma -mark 分享按钮
 - (void)shareMe:(UIButton *)button
 {
     [UMSocialSnsService presentSnsIconSheetView:self appKey:ShareKey shareText:@"#爱ZoomEye，爱分享！#" shareImage:[UIImage imageNamed:@"zoomEye"] shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToRenren, UMShareToDouban, UMShareToEmail, UMShareToSms,  nil] delegate:nil];
 }
+#pragma -mark 收藏按钮
 - (void)enshrine:(UIButton *)button
 {
-    
+    MBProgressHUD *mbHub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    mbHub.margin = 12.0f;
+    mbHub.mode = MBProgressHUDModeText;
     BOOL _isSuccess = [WmeFMDBTool addMovie:self.model];
     if (_isSuccess) {
         NSLog(@"成功");
-        cell.enshrine.selected = YES;
-        
+        mbHub.labelText = @"已加入收藏!";
+         cell.enshrine.selected = YES;
+        [mbHub hide:YES afterDelay:0.5];
     }else
     {
-        NSLog(@"失败");
-        NSLog(@"%@",[WmeFMDBTool findAllMovie].url.m3u8);
         if ([[WmeFMDBTool findM3U8:self.model]isEqualToString:self.model.url.m3u8]) {
            
             BOOL isRemove= [WmeFMDBTool removeMovie:self.model];
             if (isRemove) {
                 NSLog(@"成功移除数据库");
+                mbHub.labelText = @"收藏以移除!";
                  cell.enshrine.selected = NO;
+                [mbHub hide:YES afterDelay:0.5];
+                
             }else
             {
                 NSLog(@"失败移除数据库");
@@ -218,6 +232,18 @@ static CGFloat down = 200;
     }
     
 }
+#pragma -mark 下载按钮方法
+- (void)dowload:(UIButton *)button
+{
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"提示" message:@"此功能暂未开放" preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertC animated:YES completion:nil];
+//    __weak typeof(alertC) weakAlert = alertC;
+    [alertC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+//        [self goAuterHome:nil];
+    }]];
+    
+}
+#pragma -mark top自动放大缩小的动画
 - (void)changeImageScale
 {
  
@@ -278,25 +304,13 @@ static CGFloat down = 200;
     [self.ImageZoonOutTimer invalidate];
     self.ImageZoonOutTimer = nil;
 }
+#pragma -mark 进入发布者主页
 - (void)goAuterHome:(UIButton *)button
 {
     WmePlayerTableViewController *player = [[WmePlayerTableViewController alloc]init];
     player.listModel = self.model;
     [self.navigationController pushViewController:player animated:YES];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

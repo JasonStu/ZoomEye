@@ -14,6 +14,7 @@
 #import "WmeChannelModel.h"
 #import "WmeUrL.h"
 #import "FRDLivelyButton.h"
+#import "MBProgressHUD.h"
 @interface WmeEnShareViewController ()
 @property (nonatomic, strong) NSMutableArray *enShareArray;
 @property (nonatomic, strong) FRDLivelyButton *button;
@@ -24,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的收藏";
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.view.backgroundColor = [UIColor grayColor];
     [self.tableView registerNib:[UINib nibWithNibName:@"WmeEnShareTableViewCell" bundle:nil] forCellReuseIdentifier:@"enShareListCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -72,6 +74,30 @@
     play.title = model.title;
     play.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self.navigationController presentViewController:play animated:NO completion:nil];
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if (editingStyle  == UITableViewCellEditingStyleDelete ) {
+        MBProgressHUD *mbHub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        mbHub.margin = 12.0f;
+        mbHub.mode = MBProgressHUDModeText;
+        BOOL isSuccess = [WmeFMDBTool removeMovie:self.enShareArray[indexPath.row]];
+        if (isSuccess) {
+            NSLog(@"成功");
+            [self.enShareArray removeObject:self.enShareArray[indexPath.row]];
+            mbHub.labelText = @"收藏已删除!";
+            [mbHub hide:YES afterDelay:0.5];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+
+        }else
+        {
+            NSLog(@"删除失败");
+        }
+        
+        }
+
 }
 
 -(NSMutableArray *)enShareArray
